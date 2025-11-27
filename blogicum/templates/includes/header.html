@@ -1,14 +1,31 @@
 {% load static %}
+{% with request.resolver_match.view_name as view_name %}
 <header class="header">
-  <div class="container d-flex align-items-center justify-content-between">
+  <div class="d-flex align-items-center justify-content-between px-4">
     <div>
       <img src="{% static 'img/logo.png' %}" alt="Логотип" class="logo">
       <strong class="ms-2">Блогикум</strong>
     </div>
     <nav>
-      <a href="{% url 'blog:index' %}">Лента записей</a>
-      <a href="{% url 'pages:about' %}">О проекте</a>
-      <a href="{% url 'pages:rules' %}">Наши правила</a>
+      <a
+        href="{% url 'blog:index' %}"
+        {% if view_name == 'blog:index' %}class="active"{% endif %}
+      >
+        Лента записей
+      </a>
+      <a
+        href="{% url 'pages:about' %}"
+        {% if view_name == 'pages:about' %}class="active"{% endif %}
+      >
+        О проекте
+      </a>
+      <a
+        href="{% url 'pages:rules' %}"
+        {% if view_name == 'pages:rules' %}class="active"{% endif %}
+      >
+        Наши правила
+      </a>
     </nav>
   </div>
 </header>
+{% endwith %}
