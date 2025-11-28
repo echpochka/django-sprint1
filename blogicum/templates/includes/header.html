@@ -1,31 +1,62 @@
 {% load static %}
 {% with request.resolver_match.view_name as view_name %}
-<header class="header">
-  <div class="d-flex align-items-center justify-content-between px-4">
-    <div>
-      <img src="{% static 'img/logo.png' %}" alt="Логотип" class="logo">
-      <strong class="ms-2">Блогикум</strong>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: lightskyblue">
+    <div class="container">
+
+      <a class="navbar-brand d-flex align-items-center" href="{% url 'blog:index' %}">
+        <img
+          src="{% static 'img/logo.png' %}"
+          width="30"
+          height="30"
+          class="d-inline-block align-top me-2"
+          alt="Логотип Блогикум"
+        >
+        Блогикум
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Переключить навигацию"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a
+              class="nav-link {% if view_name == 'blog:index' %}active{% endif %}"
+              href="{% url 'blog:index' %}"
+            >
+              Лента записей
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link {% if view_name == 'pages:about' %}active{% endif %}"
+              href="{% url 'pages:about' %}"
+            >
+              О проекте
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link {% if view_name == 'pages:rules' %}active{% endif %}"
+              href="{% url 'pages:rules' %}"
+            >
+              Наши правила
+            </a>
+          </li>
+        </ul>
+      </div>
+
     </div>
-    <nav>
-      <a
-        href="{% url 'blog:index' %}"
-        {% if view_name == 'blog:index' %}class="active"{% endif %}
-      >
-        Лента записей
-      </a>
-      <a
-        href="{% url 'pages:about' %}"
-        {% if view_name == 'pages:about' %}class="active"{% endif %}
-      >
-        О проекте
-      </a>
-      <a
-        href="{% url 'pages:rules' %}"
-        {% if view_name == 'pages:rules' %}class="active"{% endif %}
-      >
-        Наши правила
-      </a>
-    </nav>
-  </div>
+  </nav>
 </header>
 {% endwith %}
